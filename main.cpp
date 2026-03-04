@@ -86,5 +86,36 @@ BiList<T>* erase(BiList<T>* h) noexcept
 	}
 }
 
+template< class T > // очистить
+BiList<T>* clear(BiList<T>* h, BiList<T>* e) noexcept
+{
+	if (h == e)
+		return e;
+
+	BiList<T>* after = e;
+	BiList<T>* before = h->prev;
+
+	while (h != e) {
+		BiList<T>* next = h->next;
+		delete h; // Деструктор
+		h = next;
+	}
+
+	if (before) {
+		before->next = after;
+	}
+	if (after) {
+		after->prev = before;
+	}
+
+	return after;
+}
+
+
+
+
+
+
+
 int main()
 {}
