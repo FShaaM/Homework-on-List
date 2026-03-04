@@ -45,6 +45,46 @@ BiList<T>* insert(BiList<T>* h, const T& d)
 	return newNode;
 }
 
+template< class T > // удалить голову
+BiList<T>* cut(BiList<T>* h) noexcept
+{
+	if (!h)
+	{
+		return nullptr;
+	}
+	else if (h->next == nullptr)
+	{
+		delete h; // Деструктор
+		return nullptr;
+	}
+	else
+	{
+		BiList<T>* newhead = h->next;
+		newhead->prev = nullptr;
+		delete h; // Деструктор
+		return newhead;
+	}
+}
+
+template< class T > // удалить после
+BiList<T>* erase(BiList<T>* h) noexcept
+{
+	if (!h || h->next == nullptr)
+	{
+		return h;
+	}
+	else
+	{
+		BiList<T>* node = h->next;
+		h->next = node->next;
+
+		if (h->next != nullptr)
+			h->next->prev = h;
+
+		delete node; // Деструктор
+		return h;
+	}
+}
 
 int main()
 {}
