@@ -111,6 +111,28 @@ BiList<T>* clear(BiList<T>* h, BiList<T>* e) noexcept
 	return after;
 }
 
+template< class T, class F > // обход
+F traverse(F f, BiList<T>* h, BiList<T>* e)
+{
+	BiList<T>* cur = h;
+
+	while (cur != nullptr)
+	{
+		f(cur->val);
+
+		if (cur == e)
+			break;
+
+		cur = cur->next;
+	}
+
+	return f;
+}
+
+
+
+
+
 
 
 
